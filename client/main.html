@@ -1,5 +1,7 @@
 <head>
   <title>Social Book</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 
@@ -11,10 +13,11 @@
 </body>
 
 <template name="nav">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-2 mb-3">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="#">Social Book</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -23,21 +26,7 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-add" href="#">add</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <a class="nav-link js-add" href="#">Add</a>
           </li>
         </ul>
         <form class="d-flex">
@@ -50,13 +39,44 @@
 </template>
 
 <template name="main">
-  {{> profile}}
-  {{> addprof}} 
+  <div class="row">
+    {{> profile}}
+  </div>
+
+  {{> addProf}}
+  {{> viewProf}}
 </template>
 
-<template name = "addprof">
+<template name="profile">
+  {{#each profiles}}
+  <div class="col-md-4" id="{{_id}}">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-primary">World</strong>
+        <h3 class="mb-0">{{fname}}</h3>
+        <div class="mb-1 text-muted">Nov 12</div>
+        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional
+          content.</p>
+      
+        <a href="#" class="stretched-link js-view">Continue reading</a>
+      </div>
+      <div class="col-auto d-none d-lg-block profHeight">
+        <img class="w-100" src="{{picPath}}" alt="">
+        <!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef"
+            dy=".3em">Thumbnail</text>
+        </svg> -->
 
-  <div class="modal" tabindex="-1" id="addmodal" data-bs-backdrop="static" data-bs-keyboard="false" >
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</template>
+
+<template name="addProf">
+  <div class="modal" tabindex="-1" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -64,35 +84,78 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          <div class="input-group mb-3">
+            <img class="w-50" id="displayPic" src="unisex-avatar.png" alt="">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Profile Picture</span>
+            <input id="profPic" type="text" class="form-control" placeholder="Paste profile picture URL"
+              aria-label="image" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">First Name</span>
+            <input id="firstN" type="text" class="form-control" placeholder="Please enter the first name"
+              aria-label="first name" aria-describedby="basic-addon2">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">Last Name</span>
+            <input id="lastN" type="text" class="form-control" placeholder="Please enter the last name"
+              aria-label="last name" aria-describedby="basic-addon3">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon4">Age</span>
+            <input type="number" min="1" class="form-control" placeholder="Please enter the age" aria-label="last name"
+              aria-describedby="basic-addon4">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon5">Sex</span>
+            <div class="addFormBorder">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="female">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Female
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="male" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Male
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary js-saveprofile">Save changes</button>
+          <button type="button" class="btn btn-primary js-saveProfile">Add Profile</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<template name="profile">
-  <div class="col-md-6">
-    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-      <div class="col p-4 d-flex flex-column position-static">
-        <strong class="d-inline-block mb-2 text-primary">World</strong>
-        <h3 class="mb-0">Featured post</h3>
-        <div class="mb-1 text-muted">Nov 12</div>
-        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="stretched-link">Continue reading</a>
-      </div>
-      <div class="col-auto d-none d-lg-block">
-        <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
+<template name="viewProf">
+  <div class="modal" tabindex="-1" id="viewModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input id="docId" type="hidden">
+          <p id="chkMe">Modal body text goes here.</p>
+          <p id="icn"><i class="fa-solid fa-pencil"></i> <i class="fa-solid fa-trash-can js-delete"></i>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 
 
 
