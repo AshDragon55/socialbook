@@ -5,6 +5,11 @@ import bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './main.html';
+import './navBar/navBar.html';
+import './viewProfile/viewProfile.html';
+import './addProfile/addProfile.html';
+import './profiles/profiles.html';
+import './confirmDel/confirmDel.html'
 
 Template.nav.events({
   'click .js-add'() {
@@ -45,11 +50,12 @@ Template.main.events({
   "click .js-delete"() {
     let dId = $("#docId").val();
     $("#viewModal").modal("hide");
-    $("#" + dId).fadeOut("slow",() => {
-   socialdb.remove({
-      "_id": dId
-    });
-  });
+    $("#conDelModal").modal("show");
+   // $("#" + dId).fadeOut("slow",() => {
+  // socialdb.remove({
+  //    "_id": dId
+   // });
+ // });
 }
 });
 
