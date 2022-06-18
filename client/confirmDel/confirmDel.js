@@ -3,9 +3,9 @@ Template.confirmDel.events({
         $("#conDelModal").modal("hide");
         let cId = $("#conId").val();
         $("#" + cId).fadeOut("slow", () => {
-            socialdb.remove({
+          socialdb.remove({
                 "_id": cId
-            });
+           });
         });
     }
 });

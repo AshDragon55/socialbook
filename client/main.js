@@ -9,6 +9,7 @@ import './navBar/navBar.html';
 import './viewProfile/viewProfile.html';
 import './addProfile/addProfile.html';
 import './profiles/profiles.html';
+import './profiles/profiles.js';
 import './confirmDel/confirmDel.html'
 
 Template.nav.events({
@@ -49,15 +50,22 @@ Template.main.events({
   },
   "click .js-delete"() {
     let dId = $("#docId").val();
+    $("#conId").val(dId);
     $("#viewModal").modal("hide");
     $("#conDelModal").modal("show");
-   // $("#" + dId).fadeOut("slow",() => {
-  // socialdb.remove({
-  //    "_id": dId
-   // });
- // });
-}
+  }
 });
+//"click .js-delete"() {
+ // let dId = $("#docId").val();
+ // $("#viewModal").modal("hide");
+//  $("#conDelModal").modal("show");
+  //$("#" + dId).fadeOut("slow",() => {
+ //socialdb.remove({
+ //   "_id": dId
+// });
+//});
+//}
+//});
 
 let validateAddForm = (fn, ln) => {
   let valid = true;
